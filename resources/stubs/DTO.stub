@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Services\{{serviceName}}\DTOs;
+
+use App\Support\DTO;
+
+class {{serviceName}}DTO extends DTO
+{
+    public $attribute1;
+    public $attribute2;
+
+    protected static function rules(): array
+    {
+        return [
+            'attribute1' => 'required|string',
+            'attribute2' => 'required|string',
+        ];
+    }
+}

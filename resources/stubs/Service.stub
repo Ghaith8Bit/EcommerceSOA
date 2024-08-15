@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Services\{{serviceName}}\Services;
+
+use App\Services\{{serviceName}}\Repositories\{{serviceName}}Repository;
+use App\Services\{{serviceName}}\DTOs\{{serviceName}}DTO;
+use App\Services\{{serviceName}}\Contracts\{{serviceName}}Contract;
+
+class {{serviceName}}Service implements {{serviceName}}Contract
+{
+    protected $repository;
+
+    public function __construct({{serviceName}}Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function getAll()
+    {
+        return $this->repository->getAll();
+    }
+
+    public function getById($id)
+    {
+        return $this->repository->findById($id);
+    }
+
+    public function create({{serviceName}}DTO $dto)
+    {
+        return $this->repository->create($dto->toArray());
+    }
+
+    public function update($id, {{serviceName}}DTO $dto)
+    {
+        return $this->repository->update($id, $dto->toArray());
+    }
+
+    public function delete($id)
+    {
+        return $this->repository->delete($id);
+    }
+}

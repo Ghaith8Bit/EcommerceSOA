@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Services\{{serviceName}}\Contracts;
+
+use App\Services\{{serviceName}}\DTOs\{{serviceName}}DTO;
+
+interface {{serviceName}}Contract
+{
+    public function getAll();
+
+    public function getById($id);
+
+    public function create({{serviceName}}DTO $dto);
+
+    public function update($id, {{serviceName}}DTO $dto);
+
+    public function delete($id);
+}

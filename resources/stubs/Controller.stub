@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Services\{{serviceName}}\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Services\{{serviceName}}\Facades\{{serviceName}}Facade;
+use App\Support\Traits\ApiResponseTrait;
+use App\Services\{{serviceName}}\DTOs\{{serviceName}}DTO;
+
+class {{serviceName}}Controller extends Controller
+{
+    use ApiResponseTrait;
+
+    public function index()
+    {
+        $data = {{serviceName}}Facade::getAll();
+        return $this->successResponse($data, '{{serviceName}}s retrieved successfully');
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $dto = {{serviceName}}DTO::fromRequest($request->all());
+            $data = {{serviceName}}Facade::create($dto);
+            return $this->successResponse($data, '{{serviceName}} created successfully', 201);
+        } catch (\InvalidArgumentException $e) {
+            return $this->errorResponse('Invalid data', 422, json_decode($e->getPrevious()->getMessage(), true));
+        }
+    }
+
+    public function show($id)
+    {
+        $data = {{serviceName}}Facade::getById($id);
+        if (!$data) {
+            return $this->errorResponse('{{serviceName}} not found', 404);
+        }
+        return $this->successResponse($data, '{{serviceName}} retrieved successfully');
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $dto = {{serviceName}}DTO::fromRequest($request->all());
+            $data = {{serviceName}}Facade::update($id, $dto);
+            return $this->successResponse($data, '{{serviceName}} updated successfully');
+        } catch (\InvalidArgumentException $e) {
+            return $this->errorResponse('Invalid data', 422, json_decode($e->getPrevious()->getMessage(), true));
+        }
+    }
+
+    public function destroy($id)
+    {
+        $deleted = {{serviceName}}Facade::delete($id);
+        if (!$deleted) {
+            return $this->errorResponse('{{serviceName}} not found or unable to delete', 404);
+        }
+        return $this->successResponse(null, '{{serviceName}} deleted successfully');
+    }
+}

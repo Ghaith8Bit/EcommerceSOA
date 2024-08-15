@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Services\{{serviceName}}\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{serviceName}} extends Model
+{
+    protected $fillable = [];
+}
